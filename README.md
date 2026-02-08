@@ -90,10 +90,6 @@ Project_KonStruct/
 │   ├── exposure.json
 │   └── input.ply
 │
-├── SIBR_viewers/       # Visualization modules/binaries
-├── train.py            # Training script
-├── render.py           # Rendering utilities
-└── README.md
 ```
 
 ---
@@ -118,7 +114,7 @@ Key files:
 
 To visualize the reconstructed scene:
 
-1. Navigate to the `SIBR_viewers/` folder.
+1. Setup to the `SIBR_viewers/` prebuild https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/binaries/viewers.zip
 2. Run the appropriate viewer binary.
 3. Load the scene from the `output/` directory.
 
