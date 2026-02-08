@@ -70,7 +70,43 @@ Because RTX 50-series GPUs and Windows setups may cause compatibility issues (CU
 To resolve these issues, the environment was configured using the following guide from the original repository:
 
 **Stable Training & Visualization Setup for RTX 50-Series (CUDA 12.8, WSL2 + Windows) #1313**
-[https://github.com/graphdeco-inria/gaussian-splatting/issues/1313](https://github.com/graphdeco-inria/gaussian-splatting/issues/1313)
+Ubuntu Linux is recommended because it feels much more stable and predictable when working with modern GPU based frameworks, especially with very new hardware like RTX 50XX series GPUs. On Windows, I often ran into issues caused by mismatches between CUDA, drivers, MSVC, and PyTorch, which led to build errors or unstable behavior. Ubuntu, on the other hand, provides a cleaner and more consistent environment where CUDA, compilers, and PyTorch work together more smoothly. In practice, this resulted in fewer unexpected errors, easier debugging, and a setup that was easier to reproduce, allowing me to focus more on training, rendering, and experimentation instead of troubleshooting system issues.
+
+OS: Ubuntu 22.04 via WSL2
+
+GPU: RTX 50 series
+
+CUDA: 12.8+
+
+PyTorch: CUDA 12.8 build
+
+Build tools: CMake + Ninja
+
+#Conda setup. ----------------------------------------------------------------------
+conda create -n gaussian-splatting python=3.10
+conda activate gaussian-splatting
+
+#Cuda Pytorch-----------------------------------------------------------------------
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
+
+#Github Repo------------------------------------------------------------------------
+git clone --recursive https://github.com/graphdeco-inria/gaussian-splatting.git
+cd gaussian-splatting
+
+#Builds---------------------------------------------------------------------------------
+pip install cmake ninja
+set DISTUTILS_USE_SDK=1
+pip install diff-gaussian-rasterization --no-build-isolation
+pip install simple-knn --no-build-isolation
+pip install fused-ssim --no-build-isolation
+
+#Training-------------------------------------------------------------------------------
+python train.py
+-s <COLMAP_DATASET_PATH>
+-m output/scene_name
+
+#Render--------------------------------------------------------------------------------
+python render.py -m output/scene_name
 
 This step-by-step issue guide was used to achieve a stable setup for both training and visualization.
 
