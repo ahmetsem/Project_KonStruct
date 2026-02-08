@@ -83,26 +83,39 @@ PyTorch: CUDA 12.8 build
 Build tools: CMake + Ninja
 
 ## Conda setup. 
+
 conda create -n gaussian-splatting python=3.10
+
 conda activate gaussian-splatting
 
 ## Cuda Pytorch
+
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu128
 
 ## Github Repo
+
 git clone --recursive https://github.com/graphdeco-inria/gaussian-splatting.git
+
 cd gaussian-splatting
 
 ## Builds
+
 pip install cmake ninja
+
 set DISTUTILS_USE_SDK=1
+
 pip install diff-gaussian-rasterization --no-build-isolation
+
 pip install simple-knn --no-build-isolation
+
 pip install fused-ssim --no-build-isolation
 
 ## Training
+
 python train.py
+
 -s <COLMAP_DATASET_PATH>
+
 -m output/scene_name
 
 ## Render
