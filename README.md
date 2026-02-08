@@ -5,68 +5,83 @@
 ## Overview
 
 Project KonStruct is a **3D scene reconstruction project** created using the **Gaussian Splatting** method.
-The goal of this project is to reconstruct a real-world faculty building into a high-quality, real-time renderable 3D scene.
+The goal of this project is to reconstruct a real-world **faculty building** into a high-quality, real-time renderable 3D scene.
 
-This project was **completed individually** using a **local personal computer**, following the exact setup and methodology described in the original Gaussian Splatting research paper.
+This project was completed **individually** (solo work) using my **local personal computer**, while following the setup and methodology described in the original Gaussian Splatting paper and its official implementation.
 
 ---
 
 ## Project Description
 
-In this project, the entire pipeline was performed from scratch:
+This project covers the full pipeline end-to-end:
 
 1. **Data Collection**
 
    * Captured images of the faculty building from multiple viewpoints.
-   * Ensured sufficient coverage for accurate reconstruction.
+   * Ensured broad coverage to allow stable camera registration and reconstruction.
 
 2. **Data Preparation**
 
-   * Processed the input images.
-   * Generated camera parameters and initial point cloud using the required preprocessing steps.
+   * Prepared the dataset in the expected structure for Gaussian Splatting.
+   * Generated and processed camera parameters and metadata.
 
 3. **Gaussian Splatting Training**
 
-   * Set up the environment locally.
-   * Followed the official implementation and training configuration.
-   * Trained the model using the collected dataset.
+   * Installed and configured the training environment locally.
+   * Followed the official repository workflow and parameters.
+   * Trained the scene using the collected dataset.
 
 4. **Result Generation**
 
-   * Produced the final 3D representation as the `output` directory.
-   * The output includes:
-
-     * Point cloud data
-     * Camera parameters
-     * Trained splatting model
+   * Produced the final reconstruction outputs inside the `output/` directory.
+   * Output includes point cloud data, camera parameters, and trained Gaussian splats.
 
 5. **Visualization**
 
-   * The reconstructed scene can be visualized using the **SIBR viewer binaries** included in the project.
-   * This allows real-time rendering of the reconstructed building.
+   * The reconstructed scene can be viewed using the **SIBR viewer binaries**.
+   * These allow interactive, real-time visualization of the reconstructed building.
 
 ---
 
-## Original Paper and Method
+## Original Paper & Official Implementation
 
 This project is based on the method described in:
 
 **3D Gaussian Splatting for Real-Time Radiance Field Rendering**
 Kerbl, Kopanas, Leimkühler, and Drettakis (2023)
 
-Official repository:
-[https://github.com/graphdeco-inria/gaussian-splatting](https://github.com/graphdeco-inria/gaussian-splatting)
+* Official repository:
+  [https://github.com/graphdeco-inria/gaussian-splatting](https://github.com/graphdeco-inria/gaussian-splatting)
 
-All setup steps, parameters, and training procedures were performed according to the original implementation.
+All core steps were performed according to the official implementation and workflow.
 
 ---
 
-## Project Structure
+## Hardware & Operating System
+
+* **GPU:** NVIDIA RTX 5070 Ti
+* **OS:** Windows 11
+* **Training environment:** Local personal computer
+
+Because RTX 50-series GPUs and Windows setups may cause compatibility issues (CUDA, PyTorch, viewer builds, etc.), several errors were encountered during the installation and training process.
+
+### Setup Solution
+
+To resolve these issues, the environment was configured using the following guide from the original repository:
+
+**Stable Training & Visualization Setup for RTX 50-Series (CUDA 12.8, WSL2 + Windows) #1313**
+[https://github.com/graphdeco-inria/gaussian-splatting/issues/1313](https://github.com/graphdeco-inria/gaussian-splatting/issues/1313)
+
+This step-by-step issue guide was used to achieve a stable setup for both training and visualization.
+
+---
+
+## Repository Structure
 
 ```
 Project_KonStruct/
 │
-├── scene/              # Input scene data
+├── scene/              # Input scene data (prepared dataset)
 ├── output/             # Reconstruction results
 │   ├── point_cloud/
 │   ├── train/
@@ -75,44 +90,53 @@ Project_KonStruct/
 │   ├── exposure.json
 │   └── input.ply
 │
-├── SIBR_viewers/       # Visualization binaries
+├── SIBR_viewers/       # Visualization modules/binaries
 ├── train.py            # Training script
-├── render.py           # Rendering script
+├── render.py           # Rendering utilities
 └── README.md
 ```
 
 ---
 
-## How to Visualize the Result
+## Outputs
 
-1. Set up  to the `SIBR_viewers` folder. (windows binary modules can be used)
-2. Run the viewer binary.
-3. Load the scene from the `output` directory.
+The final reconstruction results are stored in the `output/` folder.
+These represent the reconstructed 3D scene of the faculty building.
 
-This will display the reconstructed faculty building in real time.
+Key files:
+
+* `output/point_cloud/` — Gaussian splat representation
+* `output/cameras.json` — camera parameters
+* `output/cfg_args` — training configuration
+* `output/exposure.json` — exposure metadata
+* `output/input.ply` — exported point cloud
+* `output/train/...` — training iteration results
 
 ---
 
-## Hardware and Setup
+## Visualization with SIBR Viewer
 
-* Training performed on a **local personal computer**
-* Environment configured according to the official Gaussian Splatting repository
-* No external servers or cloud resources were used
+To visualize the reconstructed scene:
+
+1. Navigate to the `SIBR_viewers/` folder.
+2. Run the appropriate viewer binary.
+3. Load the scene from the `output/` directory.
+
+This enables interactive real-time viewing of the reconstructed faculty building.
 
 ---
 
 ## Author
 
 **Ahmet Sem**
-This project was completed **individually** as a 3D reconstruction experiment using Gaussian Splatting.
+This project was completed **individually** as a solo 3D reconstruction experiment using Gaussian Splatting.
 
 ---
 
-## Acknowledgment
+## Acknowledgments
 
-This project is based on the original work:
+This project uses the method and implementation from:
 
 > Kerbl et al., *3D Gaussian Splatting for Real-Time Radiance Field Rendering*, 2023.
 
 All credit for the method and core implementation goes to the original authors.
-
