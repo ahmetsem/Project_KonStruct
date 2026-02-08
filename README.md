@@ -128,7 +128,7 @@ This enables interactive real-time viewing of the reconstructed faculty building
 
 ## Author
 
-**Ahmet Sem**
+**ahmetsem - Ahmet Sefa Emre**
 This project was completed **individually** as a solo 3D reconstruction experiment using Gaussian Splatting.
 
 ---
